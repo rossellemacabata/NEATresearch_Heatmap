@@ -36,35 +36,17 @@
           legendElementWidth = gridSize*2,
           buckets = 9,
           colors = ["#ffffbf","#d9ef8b","#91cf60","#1a9850","#fc8d59","#d73027"],
-         // ,"#253494","#081d58"], 
-          // alternatively colorbrewer.YlGnBu[9]
-         // days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-        // participants = ["6010"],
-         dates = ["2014-11-24", "2014-12-17", "2014-12-18"]
+          //dates = ["2014-11-24", "2014-12-17", "2014-12-18"]
 
           times = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
-          datasets = ["6010.csv"];
-
-      //var y = d3.scaleLinear()
-//        .range([height, 0]);
+          //datasets = ["6010.csv"];
 
       var svg = d3.select("#chart").append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
           .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-      var dayLabels = svg.selectAll(".dayLabel")
-          .data(dates)
-          .enter().append("text")
-            .text(function (d) { return d; })
-            .attr("x", 0)
-            .attr("y", function (d, i) { return i * gridSize; })
-            .style("text-anchor", "end")
-            .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
-            .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
  
-
       var timeLabels = svg.selectAll(".timeLabel")
           .data(times)
           .enter().append("text")
@@ -86,11 +68,6 @@
           };
         },
         function(error, data) {
-
-         // y.domain([0, d3.max(data, function(d) { return d.date; })]);
-
-        //  svg.append("g")
-         //   .call(d3.axisLeft(y));
 
           var colorScale = d3.scale.quantile()
               .domain([0, buckets - 1, d3.max(data, function (d) { return d.stress; })])
